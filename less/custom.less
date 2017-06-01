@@ -1,0 +1,594 @@
+// GLOBAL STYLES
+// -------------------------
+html,
+body {
+    line-height: 1.8;
+}
+
+// GLOBAL MIXINS
+// -------------------------
+.border(@border-color: gold, @border-weight: 1px) {
+  box-shadow: inset @border-weight -@border-weight @border-weight @border-color, inset -@border-weight @border-weight @border-weight @border-color;
+}
+
+.drop-shadow(@x: 0px, @y: -10px, @blur: 10px, @spread: 10px, @alpha: 1) {
+  -webkit-box-shadow: @x @y @blur @spread rgba(7,24,41, @alpha);
+  -moz-box-shadow: @x @y @blur @spread rgba(7,24,41, @alpha);
+  box-shadow: @x @y @blur @spread rgba(7,24,41, @alpha);
+}
+
+.transition(@property: all, @duration: .5s, @easeing: ease, @delay: 0s) {
+  -webkit-transition: @property @duration @easeing @delay;
+  -moz-transition: @property @duration @easeing @delay;
+  -ms-transition: @property @duration @easeing @delay;
+  -o-transition: @property @duration @easeing @delay;
+  transition: @property @duration @easeing @delay;
+}
+
+.transform(@string){
+	-webkit-transform: @string;
+	-moz-transform: 	 @string;
+	-ms-transform: 		 @string;
+	-o-transform: 		 @string;
+}
+
+.placeholder(@color) {
+  ::-webkit-input-placeholder {color:@color;}
+  :-moz-placeholder {color:@color;}
+  ::-moz-placeholder {color:@color;}
+  :-ms-input-placeholder {color:@color;}
+}
+
+.box-shadow {
+	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+
+// LAYOUT
+// -------------------------
+
+.navbar {
+    .transition;
+    z-index: 10000;
+    width: 100%;
+	border: none;
+    font-family: @font-family-sans-serif;
+    margin-bottom: 0;
+    background: @brand-primary;
+    @media (min-width: @screen-sm) {
+        background: none;
+    }
+    &.scroll-header {
+        background: @brand-primary;
+        box-shadow: 0 3px 5px -1px rgba(0,0,0,.2),0 6px 10px 0 rgba(0,0,0,.14),0 1px 18px 0 rgba(0,0,0,.12);
+    }
+	&.navbar-inverse {
+        .navbar-brand {  
+            padding: 10px 10px 0 20px;
+            img {
+                max-height: 50px;
+            }
+            @media (min-width: @screen-sm) {
+                padding: 10px 10px 0 10px;
+                img {
+                    max-height: 60px;
+                }  
+            }
+        }
+        li {
+            display: inline-block;
+            > a:before {
+                content: "";
+                position: absolute;
+                width: 100%;
+                height: 5px;
+                bottom: 0;
+                left: 0;
+                background-color: @brand-secondary;
+                visibility: hidden;
+                -webkit-transform: scaleX(0);
+                transform: scaleX(0);
+                -webkit-transition: all 0.3s ease-in-out 0s;
+                transition: all 0.3s ease-in-out 0s;
+            }
+            &.active a:before,
+            > a:hover:before {
+                visibility: visible;
+                -webkit-transform: scaleX(1);
+                transform: scaleX(1);
+            }
+        }
+        .nav.navbar-nav {
+            text-transform: uppercase;
+            padding-left: 10px;
+            margin-top: -5px;
+            font-size: 16px;
+            @media (min-width: @screen-sm) {
+                margin-top: 0;
+                font-size: 16px;
+            }
+            @media (min-width: @screen-md) {
+                font-size: 18px;
+            }
+            @media (min-width: @screen-lg) {
+                font-size: 18px;
+            }
+        }
+	}
+    .navbar-toggle {
+        margin-right: 20px;
+        border: none;
+        &:hover,
+        &:focus {
+            background: none;
+        }
+    }
+	.navbar-collapse {
+        border-top: none;
+        box-shadow: none;
+	}
+
+}
+
+
+/*#content {
+	background-color: white;
+	margin-top: -60px;
+	z-index: 1;
+	position: relative;
+}*/
+
+/**/.home-bg {
+    //animation: 60s ease 0s normal none infinite back_animation;
+    //background: url('../img/London_accountants.jpg') no-repeat center center;
+    background-size: cover;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: .70;
+    //z-index: 980;
+    
+    background-color: @brand-primary;
+}
+
+.home-text {
+    z-index: 990;
+    position: absolute;
+    top: 35%;
+    width: 100%;
+    a {
+        color: white;
+        &:hover {
+            color: @brand-secondary;
+        }
+    }
+}
+.home-heading,
+.home-contact {
+    color: white;
+    width: 100%;
+    text-align: center;
+    text-shadow: 1px 2px 3px rgba(0, 0, 0, 0.5);
+}
+.home-heading {
+    font-size: 60px;
+    font-weight: normal;
+}
+.home-contact {
+    //bottom: 0;
+    font-size: 18px;
+    font-weight: bold;
+}
+.divider {
+    width: 80px;
+    height: 1px;
+    margin: 30px auto;
+    background-color: white;
+}
+
+.home-bg {
+    background-color: darken(@brand-primary, 20%);
+}
+
+#background_cycler {
+    overflow: hidden;
+    opacity: .9;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    div {
+        animation: 60s ease 0s normal none infinite back_animation;
+        background-size: cover;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        z-index: 1;
+        &.active {
+            z-index: 3;
+        }
+    }
+}
+
+
+@-webkit-keyframes back_animation {
+	0% {
+        -webkit-transform: scale(1);
+	}
+	50% {
+        -webkit-transform: scale(1.4);
+	}
+	100% {
+        -webkit-transform: scale(1) ;
+	}
+}
+@-moz-keyframes back_animation {
+	0% {
+        -moz-transform: scale(1);
+	}
+	50% {
+    	-moz-transform: scale(1.4);
+	}
+	100% {
+    	-moz-transform: scale(1) ;
+	}
+}
+@-o-keyframes back_animation {
+	0% {
+	    -o-transform: scale(1);
+	}
+	50% {
+	    -o-transform: scale(1.4);
+	}
+	100% {
+	    -o-transform: scale(1) ;
+	}
+}
+@keyframes back_animation {
+	0% {
+	    transform: scale(1);
+	}
+	50% {
+	    transform: scale(1.4);
+	}
+	100% {
+	    transform: scale(1) ;
+	}
+}
+
+
+.img-fullwidth {
+	width: 100%;
+    max-width: 1900px;
+	height: auto;
+    margin: 0 auto;
+}
+
+.form-row {
+	margin-left: -10px;
+	margin-right: -10px;
+}
+
+
+a {
+  .transition;
+  //font-weight: 700;
+}
+
+//textarea {
+//  max-width: 100%;
+//}
+
+.required & {
+  .control-label:after {
+    content: ' (required)';
+    font-weight: normal;
+    font-style: italic;
+  }
+}
+.validation {
+  background: @brand-danger;
+  color: @body-bg;
+  padding: 3px 12px;
+  display: inline-block;
+  width: 100%;
+}
+
+.lead {
+    color: @brand-primary;
+    line-height: 1.6;
+}
+
+
+section {
+}
+
+.img-logo {
+    max-width: 200px;
+    max-height: 150px;
+    vertical-align: top;
+    margin-right: 20px;
+}
+
+@media (min-width: @screen-sm) {
+  .dl-horizontal dt {
+      width:80px;
+      white-space: normal;
+      margin-bottom: 5px;
+  }
+  .dl-horizontal dd {
+      margin-left:100px;
+  }
+}
+
+// FORMS
+// -------------------------
+/*.form-control {
+  .secondary & {
+    .transition;
+    background-color: lighten(@brand-secondary, 7.5%);
+    border-color: lighten(@brand-secondary, 7.5%);
+    color: white;
+    box-shadow: none;
+    &:focus {
+      background-color: white;
+      border-color: white;
+      color: @gray-dark;
+    }
+    .placeholder(white);
+  }
+  textarea& {
+    max-width: 100%;
+  }
+}*/
+
+
+
+// HEADINGS
+// -------------------------
+// Merriweather 400, 700
+// Raleway 400, 700
+h1, h2, h3, h4 {
+    font-weight: normal;
+	color: @brand-primary;
+}
+h1 {
+	font-size: 30px;
+	@media (min-width: @screen-sm) {
+        font-size: 40px;
+	}
+}
+h2 {
+    font-size: 30px;
+	@media (min-width: @screen-sm) {
+      	font-size: 40px;
+	}
+    margin: 20px auto;
+}
+h3 {
+    font-size: 22px;
+}
+
+
+// CARDS
+// -------------------------
+.card {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    color: white;
+    h2, h3 {
+        color: white;
+    }
+	&.card-default {
+		color: @text-color;
+		h2, h3 {
+			color: @brand-primary;
+		}
+	}
+	&.card-secondary {
+		background-color: @brand-secondary;
+	}
+	&.card-primary {
+		background-color: @brand-primary;
+		h2, h3 {
+			color: @brand-secondary;
+		}
+        a {
+            color: @brand-secondary;
+            &:hover {
+                color: white;
+            }
+        }
+	}
+    &.card-dark {
+        background-color: @gray-darker;
+		h2, h3 {
+			color: @brand-primary;
+		}
+    }
+}
+
+.bull-bg-left {
+    background: url('../img/bull_bg_left.png') no-repeat -200px bottom;
+}
+.bull-bg-right {
+    background: url('../img/bull_bg_right.png') no-repeat right -200px bottom;
+}
+
+/* Img Hover Effect */
+.effects .img {
+	margin: -20px -20px 0 -20px;
+  position: relative;
+  overflow: hidden;
+}
+.overlay {
+  display: block;
+  margin: 0 auto;
+  position: absolute;
+  z-index: 3;
+  background-color: rgba(7,24,41,.35);
+  overflow: hidden;
+  .transition(all; .5s);
+}
+a.effects {
+	cursor: pointer;
+	display: block;
+}
+.effect {
+	.overlay {
+	  top: 0;
+	  bottom: 0;
+	  left: 0;
+	  right: 0;
+	  opacity: 0;
+	}
+	.img-responsive {
+	  .transition(all; .25s; ease-in-out);
+	}
+}
+.effect:hover .img {
+	.overlay {
+	 opacity: 1;
+	}
+	.img-responsive {
+  	.transform(scale(1.25));
+	}
+}
+
+
+//
+//.stock-item {
+//  .make-xs-column(12);
+//  .make-sm-column(6);
+//  .make-md-column(4);
+//  .make-lg-column(3);
+//}
+
+
+#back-to-top {
+    z-index: 999999;
+    transition-property: background-color, color, border;
+    &.affix-top {
+        position: absolute; /* allows it to "slide" up into view */
+        bottom: -90px; /* negative of the offset - height of link element */
+        right: 10px;
+    }
+    &.affix {
+        position: fixed; /* keeps it on the bottom once in view */
+        bottom: 10px; /* height of link element */
+        right: 10px;
+    }
+    .icon-buttons;
+    padding-bottom: 5px;
+    color: @brand-primary;
+    background: white;
+    &:hover {
+        background: @brand-secondary;
+    }
+}
+
+
+
+// FOOTER
+// -------------------------
+footer {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    background-color: @gray-darker;
+	color: white;
+	a {
+		font-size: 12px;
+		color: white;
+		&:hover {
+			color: @brand-secondary;
+		}
+	}
+    ul {
+        list-style: none;
+		padding-left: 0;
+		li {
+			display: inline-block;
+		}
+        &.links {
+            @media (min-width: @screen-sm) {
+                float: right;
+            }
+            a {
+                margin-left: 10px;
+                padding-left: 10px;
+                border-left: 1px white solid;
+            }
+            li:first-child a {
+                margin-left: 0;
+                padding-left: 0;
+                border-left: none;
+            }
+        }
+        &.social {
+            line-height: 1.4;
+            margin-top: 10px;
+            padding-left: 0;
+            text-align: center;
+            font-size: 21px;
+            padding: 10px 10px 0 10px;
+            li {
+                margin-left: 10px;
+            }
+            a {
+                .icon-buttons;
+                color: @brand-primary;
+                background: white;
+                &:hover {
+                    background: @brand-secondary;
+                }
+            }
+        }
+    }
+}
+
+
+
+
+
+.fadein { position:relative;  }
+.fadein img { position:absolute; left:0; top:0; }
+.item_sold {
+    position: absolute; 
+    z-index: 100;
+}
+
+
+
+// RESPONSIVE CSS
+// -------------------------
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: @screen-sm) {
+
+}
+
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: @screen-md) {
+
+}
+
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: @screen-lg) {
+
+}
+
+/* Mobile devices */
+@media (max-width: @screen-xs-max) {
+
+}

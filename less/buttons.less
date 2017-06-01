@@ -1,0 +1,147 @@
+// BUTTONS
+// -------------------------
+
+.icon-buttons(@link-bg: @brand-primary, @link: @brand-secondary, @hover: @body-bg) {
+  text-decoration: none;
+  font-size: 22px;
+  text-align: center;
+  color: @link;
+  background-color: @link-bg;
+  background-clip: padding-box;
+  //border: 2px solid transparent;
+  //height: 35px;
+  width: 45px;
+  padding-top: 2px;
+  display: inline-block;
+  &:hover,
+  &:focus,
+  &:active,
+  &.active {
+    color: @hover;
+    background-color: @link;
+    //border: 2px solid @hover;
+  }
+}
+
+// Change solid btn to outlines on hover, change outlined btn to solid on hover
+.outline-buttons(@color, @background) {
+  &:focus,
+  &:active:focus,
+  &.active:focus {
+    outline: 0 none;
+  }
+  color: @color;
+  border-color: transparent;
+  background-color: @background;
+  &:hover,
+  &:active,
+  &.active {
+    color: @background;
+    border-color: @background;
+    //background-color: transparent;
+    background-color: @color;
+  }
+  &.btn-outline {
+    color: @background;
+    border-color: @background;
+    background-color: transparent;
+    &:hover,
+    &:active,
+    &.active {
+      color: @color;
+      border-color: transparent;
+      background-color: @background;
+    }
+  }
+}
+
+.btn {
+  .button-size(@padding-base-vertical; @padding-base-horizontal*(1.5); @font-size-base; @line-height-base; @border-radius-base);
+  .transition(all, .3s, ease); // add default transition animation settings to .btn
+  //.btn-animated;
+  font-weight: 700;
+  //text-transform: uppercase;
+  border: 1px solid;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  &:hover {
+    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+  }
+}
+
+// Updated Button Sizes
+.btn-lg {
+  .button-size(@padding-large-vertical*(1.5); @padding-large-horizontal*(2); @font-size-large; @line-height-large; @border-radius-large);
+  font-weight: 300;
+  font-size: 34px;
+  span {
+    font-weight: 700;
+    font-size: 18px;
+    display: block;
+  }
+}
+.btn-sm {
+  .button-size(@padding-small-vertical; @padding-small-horizontal*(1.5); @font-size-small; @line-height-small; @border-radius-small);
+}
+.btn-xs {
+  .button-size(@padding-xs-vertical*(3); @padding-xs-horizontal*(2.5); @font-size-small*(.9); @line-height-small; @border-radius-small);
+}
+
+// Regenerate buttons
+.btn-default {
+  .outline-buttons(@btn-default-color; @btn-default-bg);
+}
+.btn-primary {
+	.outline-buttons(@btn-primary-color; @btn-primary-bg);
+}
+.btn-secondary {
+	.outline-buttons(@btn-secondary-color; @brand-secondary);
+}
+.btn-success {
+	.outline-buttons(@btn-success-color; @btn-success-bg);
+}
+.btn-info {
+	.outline-buttons(@btn-info-color; @btn-info-bg);
+}
+.btn-warning {
+	.outline-buttons(@btn-warning-color; @btn-warning-bg);
+}
+.btn-danger {
+	.outline-buttons(@btn-danger-color; @btn-danger-bg);
+}
+
+
+.btn-animated {
+    overflow: hidden;
+    span {
+      position: relative;
+      display: inline-block;
+    .transition(transform, .3s);
+    &::before {
+        position: absolute;
+        top: 115%;
+        content: attr(data-hover);
+      .transform(translate3d(0,0,0));
+    }
+    }
+    &:hover span,
+    &:focus span {
+    .transform(translateY(-115%));
+    }
+}
+
+
+
+.btn-round {
+  border-radius: 100%;
+  font-size: 20px;
+  padding: 0;
+  border: none;
+  height: 40px;
+  width: 40px;
+  background-color: @gray-light;
+  color: @text-color;
+  &:hover {
+    background-color: @brand-secondary;
+    color: white;
+  }
+}
